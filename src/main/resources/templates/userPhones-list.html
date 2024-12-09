@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>    
+    <title>userPhones List</title>
+</head>
+<body>    
+    <h1>userPhones List</h1>    
+    <table border="1">        
+        <thead>            
+            <tr>                
+                <th>ID</th>                
+                <th>Name</th>                
+                <th>Email</th>                
+                <th>phoneNumber</th>                
+                <th>Details</th>            
+            </tr>        
+        </thead>        
+        <tbody>            
+            <tr th:each="user : ${userPhones}">                
+                <td th:text="${user.id}"></td>                
+                <td th:text="${user.name}"></td>                
+                <td th:text="${user.email}"></td>                
+                <td th:text="${user.phoneNumber != null ? user.phoneNumber : 'N/A'}"></td>                
+                <td><a th:href="@{/users/{id}(id=${user.id})}">View Details</a></td>            
+            </tr>        
+        </tbody>    
+    </table>
+</body>
+</html>
