@@ -11,7 +11,9 @@
                 <th>ID</th>                
                 <th>Name</th>                
                 <th>Email</th>                
-                <th>Details</th>            
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>            
             </tr>        
         </thead>        
         <tbody>            
@@ -19,9 +21,26 @@
                 <td th:text="${user.id}"></td>                
                 <td th:text="${user.name}"></td>                
                 <td th:text="${user.email}"></td>                
-                <td><a th:href="@{/users/{id}(id=${user.id})}">View Details</a></td>            
+                <td><a th:href="@{/users/{id}(id=${user.id})}">View Details</a></td>
+                <td>
+                    <a th:href="@{/users/edit/{id}(id=${user.id})}">바꾸자</a>
+                </td> 
+                <td>
+                    <form th:action="@{users/delete/{id}(id=${user.id})}" method="POST">
+                        <button type="submit">지우개</button>
+                    </form>
+                </td>           
             </tr>        
         </tbody>    
     </table>
+
+    <hr />
+
+    <h2>데이터를 넣겠습니다</h2>
+    <form action="/users/insert" method="POST">
+        <input type="text" name="name" placeholder="영어로 이름을쓰세요">
+        <input type="text" name="email" placeholder="이메일을 넣으세요">
+        <button type="submit">저장합니다?? 진짜로????????</button>
+    </form>
 </body>
 </html>

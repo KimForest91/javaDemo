@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example</title>
+</head>
+<body>
+<form action="/users/insert" method="POST">
+    <input type="text" name="name" placeholder="영어로 이름을쓰세요">
+    <input type="text" name="email" placeholder="이메일을 넣으세요">
+    <button type="submit">저장합니다?? 진짜로????????</button>
+</form>
+<!-- <ul class="card">
+    <li th:each="user : ${users}">
+        <div>
+            <h4 th:text="${user.name}"></h4>
+            <p th:text="${user.email}"></p>
+        </div>
+    </li>
+</ul> -->
+</body>
+</html>

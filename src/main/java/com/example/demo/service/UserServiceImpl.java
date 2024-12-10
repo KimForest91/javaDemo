@@ -44,4 +44,20 @@ public class UserServiceImpl implements UserService {
         List<UserPhonesVO> usersPhones = userPhonesMapper.getAllUsersPhones();
         return usersPhones;
     }
+
+    @Override
+    public void insertUsers(User user) {
+        userMapper.insertUser(user);
+    }
+
+    @Override
+    public User updateUser(User user) {
+        userMapper.updateUser(user);
+        return user;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userMapper.deleteUser(id);
+    }
 }
