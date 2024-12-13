@@ -11,5 +11,6 @@ public interface UserService {
     List<UserPhonesVO> getAllUsersPhones();
     void insertUsers(User user);
     User updateUser(User user);
+    void updatePhoneNumber(UserPhonesVO userPhonesVO);
     void deleteUser(Long id);
 }

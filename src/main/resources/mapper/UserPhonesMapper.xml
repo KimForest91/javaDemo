@@ -6,4 +6,7 @@
         FROM users u        
         LEFT JOIN phones p ON u.id = p.user_id    
     </select> 
+    <update id="updatePhoneNumber" parameterType="com.example.demo.model.UserPhonesVO">    
+        UPDATE phones SET phone_number=#{phoneNumber} WHERE user_id=#{id}
+    </update>    
 </mapper>

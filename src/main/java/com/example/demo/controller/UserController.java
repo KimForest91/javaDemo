@@ -11,12 +11,10 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -62,6 +60,25 @@ public class UserController {
         return "example";
     }
 
+
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        // System.out.println("=========================delete id : " + id);
+        userService.deleteUser(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/edit/{id}")
+    // @PathVariable URL 경로의 변수를 메소드 파라미터로 바인딩 - 생략불가
+    public String editUser(@PathVariable Long id, Model model) {
+        System.out.println("===============edit id : " + id);
+        System.out.println("===============edit model : " + model);
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "edit-list";
+    }
+
+    
     @PostMapping("/insert")
     public String setUsers(String name, String email, Model model) {
         User newUser = new User();
@@ -72,30 +89,26 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        // System.out.println("=========================delete id : " + id);
-        userService.deleteUser(id);
-        return "redirect:/users";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String editUser(@PathVariable Long id, Model model) {
-        System.out.println("===============edit id : " + id);
-        System.out.println("===============edit model : " + model);
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "edit-list";
-    }
-
     @PostMapping("/update")
-    public String updateUser(Long id, String name, String email) {
-        User user = userService.getUserById(id);
-        user.setName(name);
-        user.setEmail(email);
+    // @ModelAttribute 폼데이터를 객체로 바인딩 - 생략가능
+    public String updateUser(@ModelAttribute User user, @ModelAttribute UserPhonesVO userPhonesVO) {
+
+        System.out.println(user);
+        System.out.println(userPhonesVO);
+
         userService.updateUser(user);
+        userService.updatePhoneNumber(userPhonesVO);
+        
         return "redirect:/users";
     }
+
+    // public String updateUser(Long id, String name, String email) {
+    //     User user = userService.getUserById(id);
+    //     user.setName(name);
+    //     user.setEmail(email);
+    //     userService.updateUser(user);
+    //     return "redirect:/users";
+    // }
     
     // @GetMapping("/insert")
     // public String setUsers(Model model) {

@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override    
     public User getUserById(Long id) {        
         User user = userMapper.getUserById(id);        
-        logger.info("Retrieved user: {}", user); // 로그 출력        
+        logger.info("Retrieved user: {}", user); // 로그 출력
         return user;    
     }
 
@@ -59,5 +59,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userMapper.deleteUser(id);
+    }
+
+    @Override
+    public void updatePhoneNumber(UserPhonesVO userPhonesVO) {
+        userPhonesMapper.updatePhoneNumber(userPhonesVO);
     }
 }
